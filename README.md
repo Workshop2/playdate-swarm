@@ -1,3 +1,5 @@
+<img src="https://github.com/Workshop2/playdate-swarm/raw/main/swarm-example.gif" width="800" height="480" />
+
 # Playdate Swarm
 This is an attempt to learn the playdate SDK + Lua by migrating this project https://github.com/workshop2/swarm
 
