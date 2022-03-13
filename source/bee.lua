@@ -2,24 +2,22 @@ import "CoreLibs/graphics"
 import "CoreLibs/object"
 import "game"
 
-local gfx <const> = playdate.graphics
+local gfx<const> = playdate.graphics
 
 class("bee").extends()
 
 function bee:init()
     self.this = {
-        position = playdate.geometry.point.new(
-            math.random(0, gameWidth),
-            math.random(0, gameHeight)),
+        position = playdate.geometry.point.new(math.random(0, gameWidth), math.random(0, gameHeight)),
         velocity = playdate.geometry.point.new(0, 0),
         acceleration = playdate.geometry.point.new(0, 0),
-		radius = 2,
+        radius = 2,
 
         -- TODO: make these random
         rf = 0.00008,
         accelerationClamp = 0.639756,
         velocityClamp = 8.65701
-	}
+    }
 end
 
 function bee:update(target)
@@ -31,7 +29,7 @@ function bee:update(target)
     local accelerationRate = distance * this.rf;
     this.acceleration.x = delta.x * accelerationRate;
     this.acceleration.y = delta.y * accelerationRate;
-    
+
     this.acceleration.x = clamp(this.acceleration.x, this.accelerationClamp);
     this.acceleration.y = clamp(this.acceleration.y, this.accelerationClamp);
 
@@ -41,8 +39,8 @@ function bee:update(target)
     this.velocity.x = clamp(this.velocity.x, this.velocityClamp);
     this.velocity.y = clamp(this.velocity.y, this.velocityClamp);
 
-    this.position.x += this.velocity.x;
-    this.position.y += this.velocity.y;
+    this.position.x = this.position.x + this.velocity.x;
+    this.position.y = this.position.y + this.velocity.y;
 end
 
 function bee:draw()
