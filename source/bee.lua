@@ -1,6 +1,7 @@
 import "CoreLibs/graphics"
 import "CoreLibs/object"
 import "game"
+import "target"
 
 local gfx<const> = playdate.graphics
 
@@ -13,18 +14,19 @@ function bee:init()
         acceleration = playdate.geometry.point.new(0, 0),
         radius = 2,
 
-        -- TODO: make these random
-        rf = 0.00008,
-        accelerationClamp = 0.639756,
-        velocityClamp = 8.65701
+        -- Randoms
+        rf = math.random(2, 9) * 0.00001,
+        accelerationClamp = diffuse(0.3),
+        velocityClamp = diffuse(5)
     }
 end
 
 function bee:update(target)
     local this = self.this;
+    local targetPosition = target:position()
 
-    local delta = target - this.position
-    local distance = this.position:distanceToPoint(target)
+    local delta = targetPosition - this.position
+    local distance = this.position:distanceToPoint(targetPosition)
 
     local accelerationRate = distance * this.rf;
     this.acceleration.x = delta.x * accelerationRate;
@@ -58,4 +60,8 @@ function clamp(value, limit)
     end
 
     return value
+end
+
+function diffuse(value)
+    return value * (math.random(085, 115) * 0.01);
 end
