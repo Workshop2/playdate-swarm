@@ -33,7 +33,7 @@ function dvd:update()
         label.xspeed = -label.xspeed;
 		swap = true
     end
-        
+
     if (label.y + label.height >= 240 or label.y <= 0) then
         label.yspeed = -label.yspeed;
 		swap = true

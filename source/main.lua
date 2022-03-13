@@ -1,22 +1,39 @@
-import "dvd" -- DEMO
-local dvd = dvd(1, -1) -- DEMO
+import "bee"
+import "game"
+
+local bees = {
+	bee(),
+	bee(),
+	bee(),
+	bee(),
+	bee(),
+	bee(),
+	bee(),
+	bee(),
+	bee()
+}
+
+local target = playdate.geometry.point.new(gameWidth / 2, gameHeight / 2)
 
 local gfx <const> = playdate.graphics
-local font = gfx.font.new('font/Mini Sans 2X') -- DEMO
 
 local function loadGame()
 	playdate.display.setRefreshRate(50) -- Sets framerate to 50 fps
 	math.randomseed(playdate.getSecondsSinceEpoch()) -- seed for math.random
-	gfx.setFont(font) -- DEMO
 end
 
 local function updateGame()
-	dvd:update() -- DEMO
+	for index, value in pairs(bees) do
+		value:update(target)
+	 end
 end
 
 local function drawGame()
-	gfx.clear() -- Clears the screen
-	dvd:draw() -- DEMO
+	gfx.clear()
+	
+	for index, value in pairs(bees) do
+		value:draw()
+	 end
 end
 
 loadGame()
